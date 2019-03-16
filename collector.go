@@ -230,15 +230,15 @@ func freeipmiOutput(cmd string, rmcp *rmcpConfig, arg ...string) ([]byte, error)
 }
 
 func ipmiMonitoringOutput(rmcp *rmcpConfig) ([]byte, error) {
-	return freeipmiOutput("ipmimonitoring", rmcp, "-Q", "--comma-separated-output", "--no-header-output", "--sdr-cache-recreate")
+	return freeipmiOutput("ipmimonitoring", rmcp, "-Q", "--comma-separated-output", "--no-header-output", "--sdr-cache-recreate", "--session-timeout=5000")
 }
 
 func ipmiDCMIOutput(rmcp *rmcpConfig) ([]byte, error) {
-	return freeipmiOutput("ipmi-dcmi", rmcp, "--get-system-power-statistics")
+	return freeipmiOutput("ipmi-dcmi", rmcp, "--get-system-power-statistics", "--session-timeout=5000")
 }
 
 func bmcInfoOutput(rmcp *rmcpConfig) ([]byte, error) {
-	return freeipmiOutput("bmc-info", rmcp, "--get-device-id")
+	return freeipmiOutput("bmc-info", rmcp, "--get-device-id", "--session-timeout=5000")
 }
 
 func splitMonitoringOutput(impiOutput []byte, excludeSensorIds []int64) ([]sensorData, error) {
